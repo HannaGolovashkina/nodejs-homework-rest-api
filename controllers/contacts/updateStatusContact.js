@@ -1,10 +1,11 @@
 const {Contact} = require("../../models/contacts");
 const { RequestError } = require("../../helpers");
 
-const getContact = async (req, res) => {
+const updateStatusContact = async (req, res) => {
   const { contactId } = req.params;
-  const result = await Contact.findById(contactId);
-  console.log(result);
+  const result = await Contact.findByIdAndUpdate(contactId, req.body, {
+    new: true,
+  });
   if (!result) {
     throw new RequestError(404, `Contact with id - ${contactId} not found`);
   }
@@ -15,4 +16,4 @@ const getContact = async (req, res) => {
   });
 };
 
-module.exports = getContact;
+module.exports = updateStatusContact;
