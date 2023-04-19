@@ -9,11 +9,11 @@ const router = express.Router();
 
 router.get("/", auth, ctrlWrapper(ctrl.getContacts));
 
-router.get("/:contactId", ctrlWrapper(ctrl.getContact));
+router.get("/:contactId", isValidId, ctrlWrapper(ctrl.getContact));
 
 router.post("/", auth, validationMiddleware, ctrlWrapper(ctrl.createContact));
 
-router.delete("/:contactId", ctrlWrapper(ctrl.removeContact));
+router.delete("/:contactId", isValidId, ctrlWrapper(ctrl.removeContact));
 
 router.patch(
     "/:contactId/favorite",
